@@ -28,6 +28,13 @@ async function run() {
         const postResult = await eventCollection.insertOne(event);
         res.send(postResult);
     });
+
+    // GET API to get all the events
+    app.get('/event', async (req, res) => {
+        const query = {};
+        const getResult = await eventCollection.find(query).toArray();
+        res.send(getResult);
+    });
 }
 run().catch(console.dir);
 
