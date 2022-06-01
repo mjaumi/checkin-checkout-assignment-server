@@ -18,6 +18,16 @@ async function run() {
     await client.connect();
 
     console.log('MongoDB Connected');
+
+    // Database collections
+    const eventCollection = client.db('checkInCheckOut').collection('events');
+
+    // POST API to add a new event
+    app.post('/event', async (req, res) => {
+        const event = req.body;
+        const postResult = await eventCollection.insertOne(event);
+        res.send(postResult);
+    });
 }
 run().catch(console.dir);
 
